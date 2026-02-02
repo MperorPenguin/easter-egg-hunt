@@ -1,56 +1,112 @@
+/* =========================
+   Root Variables (Palette)
+   ========================= */
 :root {
-  --pink: #f7c6d0;
-  --peach: #ffe0b5;
-  --cream: #fffaf2;
-  --yellow: #ffb703;
-  --text: #333;
+  --sky: #CEFAFE;
+  --mint: #5EE9B5;
+  --rose: #FDA5D5;
+  --sun: #FFB86A;
+  --text: #2f2f2f;
 }
 
-/* iOS safe-area support */
+/* =========================
+   Base Layout + Safe Areas
+   ========================= */
 body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--text);
+
+  background: linear-gradient(
+    270deg,
+    var(--sky),
+    var(--rose),
+    var(--sky)
+  );
+  background-size: 500% 500%;
+  animation: bgMove 22s ease infinite;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /* iOS safe areas */
   padding:
     env(safe-area-inset-top)
     env(safe-area-inset-right)
     env(safe-area-inset-bottom)
     env(safe-area-inset-left);
-}
 
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  background: linear-gradient(270deg, var(--pink), var(--peach), var(--cream));
-  background-size: 600% 600%;
-  animation: bgMove 20s ease infinite;
-  color: var(--text);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  overflow: hidden;
+  padding-top: clamp(24px, 8vh, 80px);
+  padding-bottom: clamp(24px, 8vh, 80px);
 }
 
 @keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+/* =========================
+   Floating Eggs (Atmosphere)
+   ========================= */
+.egg {
+  position: absolute;
+  font-size: 2.2rem;
+  opacity: 0.18;
+  animation: float 14s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.egg:nth-child(1) {
+  left: 12%;
+  bottom: 12%;
+  animation-delay: 0s;
+}
+
+.egg:nth-child(2) {
+  left: 75%;
+  bottom: 10%;
+  animation-delay: 4s;
+}
+
+.egg:nth-child(3) {
+  left: 45%;
+  bottom: 6%;
+  animation-delay: 8s;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-48px); }
+  100% { transform: translateY(0); }
+}
+
+/* =========================
+   Card Container
+   ========================= */
 .card {
   background: white;
-  border-radius: 26px;
-  padding: clamp(24px, 5vw, 34px);
-  max-width: 420px;
+  border-radius: 28px;
+
+  padding: clamp(24px, 5vw, 36px);
   width: 100%;
+  max-width: 420px;
   margin: 0 auto;
-  box-shadow: 0 24px 55px rgba(0,0,0,0.14);
+
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, 0.14);
+
   animation: cardIn 0.6s ease;
 }
 
 @keyframes cardIn {
   from {
     opacity: 0;
-    transform: translateY(25px) scale(0.97);
+    transform: translateY(28px) scale(0.96);
   }
   to {
     opacity: 1;
@@ -58,77 +114,88 @@ body {
   }
 }
 
+/* =========================
+   Typography
+   ========================= */
 h1 {
-  font-size: clamp(1.3rem, 4.5vw, 1.7rem);
-  margin-bottom: 12px;
+  font-size: clamp(1.35rem, 4.5vw, 1.75rem);
+  margin: 0 0 14px;
 }
 
 p {
   font-size: clamp(1rem, 3.8vw, 1.15rem);
   line-height: 1.65;
-  margin-bottom: 24px;
+  margin: 0 0 26px;
   white-space: pre-line;
 }
 
+/* =========================
+   Progress Bar
+   ========================= */
 .progress {
-  height: 8px;
-  background: #eee;
+  height: 9px;
+  background: #f1f1f1;
   border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .progress-bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--yellow), #ffd166);
+  background: linear-gradient(
+    90deg,
+    var(--mint),
+    var(--sun)
+  );
   transition: width 0.6s ease;
 }
 
+/* =========================
+   Primary Button
+   ========================= */
 button {
-  background: var(--yellow);
-  border: none;
-  border-radius: 999px;
-  padding: 14px 26px;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: 600;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
 
-button {
-  background: var(--yellow);
+  background: var(--sun);
+  color: #2b2b2b;
+
   border: none;
   border-radius: 999px;
+
   padding: 16px 28px;
   font-size: clamp(1rem, 4vw, 1.15rem);
-  cursor: pointer;
   font-weight: 600;
-  width: 100%;
-  max-width: 280px;
-  margin: 0 auto;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.2);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.22);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.2s ease;
 }
 
-.egg {
-  position: absolute;
-  font-size: 2rem;
-  opacity: 0.18;
-  animation: float 12s ease-in-out infinite;
+button:hover {
+  background: #ffcc8f;
+  transform: translateY(-1px);
 }
 
-.egg:nth-child(1) { left: 12%; bottom: 10%; animation-delay: 0s; }
-.egg:nth-child(2) { left: 75%; bottom: 12%; animation-delay: 4s; }
-.egg:nth-child(3) { left: 45%; bottom: 6%; animation-delay: 8s; }
-
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-45px); }
-  100% { transform: translateY(0); }
+button:active {
+  transform: scale(0.94);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.28);
 }
 
-
-
-
+/* =========================
+   Accessibility Enhancements
+   ========================= */
+button:focus-visible {
+  outline: 3px solid var(--mint);
+  outline-offset: 3px;
+}

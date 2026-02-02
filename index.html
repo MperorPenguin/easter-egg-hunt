@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Easter Egg Hunt 🥚</title>
+
+<style>
+  :root {
+    --pink: #f7c6d0;
+    --peach: #ffe0b5;
+    --cream: #fffaf2;
+    --yellow: #ffb703;
+    --text: #333;
+  }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(270deg, var(--pink), var(--peach), var(--cream));
+    background-size: 600% 600%;
+    animation: bgMove 18s ease infinite;
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  @keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .egg {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.2;
+    animation: float 10s ease-in-out infinite;
+  }
+
+  .egg:nth-child(1) { left: 10%; top: 80%; animation-delay: 0s; }
+  .egg:nth-child(2) { left: 70%; top: 85%; animation-delay: 3s; }
+  .egg:nth-child(3) { left: 40%; top: 90%; animation-delay: 6s; }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-40px); }
+    100% { transform: translateY(0); }
+  }
+
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    max-width: 340px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    animation: cardIn 0.6s ease;
+  }
+
+  @keyframes cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    white-space: pre-line;
+  }
+
+  button {
+    background: var(--yellow);
+    border: none;
+    border-radius: 999px;
+    padding: 14px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+
+  button:hover {
+    transform: translateY(-1px);
+  }
+
+  button:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  }
+</style>
+</head>
+
+<body>
+
+<div class="egg">🥚</div>
+<div class="egg">🐣</div>
+<div class="egg">🥚</div>
+
+<div class="card" id="app">
+  <h1>🐣 Easter Egg Hunt</h1>
+  <p>Ready to find some hidden treats?</p>
+  <button onclick="nextClue()">Start the Hunt</button>
+</div>
+
+<script>
+const clues = [
+  {
+    title: "🥚 Clue 1",
+    text: "I’m not gold, but I’m worth the search,\nI rest where evenings claim their perch.\nA place to sink, a place to stay,\nLook where you sit at end of day."
+  },
+  {
+    title: "🥚 Clue 2",
+    text: "I wake you gently, I warm your hands,\nI help you function — part of the plan.\nBefore the day has truly begun,\nI’m filled with something dark… or none."
+  },
+  {
+    title: "🥚 Clue 3",
+    text: "I glow at night, I steal your sight,\n“One more episode” turns into night.\nIf chocolate hid where stories are told,\nLook where the comfort is bought and sold."
+  },
+  {
+    title: "🥚 Clue 4",
+    text: "I spin, I clean, I hum away,\nI eat your socks and money each day.\nNot a place you’d think to explore,\nBut check where the washing waits once more."
+  },
+  {
+    title: "🐰 Final Find",
+    text: "You did it!\nThe treasure is found.\n\nBut the sweetest thing?\nYou ❤️\n\nHappy Easter."
+  }
+];
+
+let index = -1;
+
+function nextClue() {
+  index++;
+  const app = document.getElementById("app");
+
+  if (index < clues.length) {
+    app.classList.remove("card");
+    void app.offsetWidth; // reset animation
+    app.classList.add("card");
+
+    app.innerHTML = `
+      <h1>${clues[index].title}</h1>
+      <p>${clues[index].text}</p>
+      ${index < clues.length - 1 
+        ? '<button onclick="nextClue()">Next clue</button>' 
+        : ''}
+    `;
+  }
+}
+</script>
+
+</body>
+</html>

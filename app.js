@@ -42,9 +42,9 @@ const clues = [
     text: "I spin, I clean, I hum away,\nI eat your socks and money each day.\nNot a place you’d think to explore,\nBut check where the washing waits once more."
   },
   {
-    title: "🐰 Adventure Complete",
-    text: "You did it, Jade 💛\n\nThe treats are found,\nbut the real treasure is\nhow much you’re loved.\n\nHappy Easter 🐣"
-  }
+  title: "🐰 Final Clue",
+  text: "You’ve followed the trail and done so well,\nOne last place remains — can you tell?\nDownstairs still, where treats may hide,\nThe final reward waits tucked inside.\n\nYou did it, Jade 💛\nHappy Easter 🐣"
+}
 ];
 
 let index = -1;
@@ -70,3 +70,4 @@ function nextClue() {
     ${index < clues.length - 1 ? `<button onclick="nextClue()">Next clue</button>` : ""}
   `;
 }
+

@@ -1,6 +1,10 @@
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let audioCtx = null;
 
 function playSound(type) {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
 
@@ -31,7 +35,7 @@ const clues = [
   },
   {
     title: "🥚 Clue 3",
-    text: "I glow at night, I steal your sight,\n“One more episode” turns into night.\nIf chocolate hid where stories are told,\nLook where the comfort is bought and sold."
+    text: "I glow at night, I steal your sight,\nOne more episode turns into night.\nIf chocolate hid where stories are told,\nLook where the comfort is bought and sold."
   },
   {
     title: "🥚 Clue 4",

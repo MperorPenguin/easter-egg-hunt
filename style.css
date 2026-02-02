@@ -6,6 +6,15 @@
   --text: #333;
 }
 
+/* iOS safe-area support */
+body {
+  padding:
+    env(safe-area-inset-top)
+    env(safe-area-inset-right)
+    env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -112,3 +121,4 @@ button:active {
   50% { transform: translateY(-45px); }
   100% { transform: translateY(0); }
 }
+
